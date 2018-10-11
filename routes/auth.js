@@ -12,7 +12,20 @@ Router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('dashboard');
+    res.redirect('/dashboard');
   });
+
+Router.get('/verify',(req,res)=>{
+	if(req.user != undefined){
+		console.log(req.user);
+	}else{
+		console.log('Not authorized');
+	}
+});
+
+Router.get('/logout',(req,res)=>{
+	req.logout();
+	res.redirect('/');
+});
 
 module.exports = Router;
